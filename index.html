@@ -51,7 +51,7 @@ nav a:hover::after,nav a.active::after{width:100%}
 .nav-actions{display:flex;gap:10px;align-items:center}
 .icon-btn{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);
   background:var(--card);color:var(--text);cursor:pointer;font-size:1.05rem;
-  display:flex;align-items:center;justify-content:center;transition:.25s}
+  display:flex;align-items:center;justify-content:center;transition:.25s;text-decoration:none}
 .icon-btn:hover{transform:translateY(-2px);border-color:var(--acc);box-shadow:0 6px 18px rgba(56,189,248,.25)}
 
 /* ===== hero ===== */
@@ -179,7 +179,6 @@ footer .heart{color:#f472b6}
   header{min-height:auto;padding:30px 0 10px}
   h1 .glow{color:#111!important;filter:none}
   .roles{color:#444}
-  .roles::after{content:''}
   section{padding:26px 0 10px;page-break-inside:avoid}
   .stat,.skill,.chip,.titem .card,.edu,.ccard{background:#fafafa!important;border-color:#ddd!important;box-shadow:none!important}
   .bar{background:#e5e5e5}
@@ -208,7 +207,7 @@ footer .heart{color:#f472b6}
   </ul>
   <div class="nav-actions">
     <button class="icon-btn" id="themeBtn" title="Ganti tema">🌙</button>
-    <button class="icon-btn" id="printBtn" title="Unduh / Cetak PDF">🖨️</button>
+    <a class="icon-btn" href="https://1drv.ms/f/c/60661cfbf9880af9/IgCQc1S1IGKfSJ0ehuBuHA6zAex5pNM4GJydZKvHb7u1I6U?e=xJjSLc" target="_blank" rel="noopener" title="Unduh CV dari OneDrive">📥</a>
   </div>
 </nav>
 
@@ -220,7 +219,7 @@ footer .heart{color:#f472b6}
   dengan fondasi Sistem Informasi dan keterampilan web programming, instalasi sistem operasi, serta pemeliharaan fasilitas.</p>
   <div class="hero-cta">
     <a class="btn btn-primary" href="#kontak">Hubungi Saya →</a>
-    <button class="btn btn-ghost" id="printBtn2">📄 Unduh CV (PDF)</button>
+    <a class="btn btn-ghost" href="https://1drv.ms/f/c/60661cfbf9880af9/IgCQc1S1IGKfSJ0ehuBuHA6zAex5pNM4GJydZKvHb7u1I6U?e=xJjSLc" target="_blank" rel="noopener">📄 Unduh CV (PDF)</a>
   </div>
   <div class="scroll-hint">⌄</div>
 </header>
@@ -362,11 +361,6 @@ themeBtn.onclick=()=>{
   if(light){el.removeAttribute('data-theme');themeBtn.textContent='🌙';localStorage.setItem('cv-theme','dark');}
   else{el.setAttribute('data-theme','light');themeBtn.textContent='☀️';localStorage.setItem('cv-theme','light');}
 };
-
-/* ---------- print ---------- */
-function doPrint(){window.print();}
-document.getElementById('printBtn').onclick=doPrint;
-document.getElementById('printBtn2').onclick=doPrint;
 
 /* ---------- typewriter ---------- */
 const roles=['Admin Engineering','IT Support','Web Programming Enthusiast','Problem Solver'];
