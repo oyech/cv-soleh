@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solehudin — Admin Engineering & IT Support</title>
+<meta name="description" content="CV Interaktif Solehudin — Admin Engineering dengan latar belakang Sistem Informasi & Web Programming.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍🔧</text></svg>">
+<style>
+:root{
+  --bg:#0b1120; --bg2:#0f172a; --card:#151e33; --card2:#1a2540;
+  --text:#e2e8f0; --muted:#94a3b8; --line:#243149;
+  --acc:#38bdf8; --acc2:#818cf8; --grad:linear-gradient(135deg,#38bdf8,#818cf8);
+}
+[data-theme="light"]{
+  --bg:#f1f5f9; --bg2:#e7edf5; --card:#ffffff; --card2:#f8fafc;
+  --text:#0f172a; --muted:#5b6b81; --line:#dbe3ee;
+  --acc:#0284c7; --acc2:#6366f1;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  background:var(--bg); color:var(--text);
+  transition:background .4s,color .4s;
+  overflow-x:hidden;
+}
+::selection{background:var(--acc);color:#0b1120}
+
+/* ===== canvas & grid bg ===== */
+#fx{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55}
+.vignette{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse at 50% -10%,rgba(56,189,248,.14),transparent 55%),
+             radial-gradient(ellipse at 85% 110%,rgba(129,140,248,.12),transparent 55%);}
+
+/* ===== nav ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 5vw;backdrop-filter:blur(14px);
+  background:color-mix(in srgb,var(--bg) 72%,transparent);
+  border-bottom:1px solid var(--line);
+}
+nav .logo{font-weight:800;font-size:1.05rem;letter-spacing:.5px;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+nav ul{display:flex;gap:26px;list-style:none}
+nav a{color:var(--muted);text-decoration:none;font-size:.86rem;font-weight:600;transition:color .25s;position:relative}
+nav a::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--grad);transition:width .3s;border-radius:2px}
+nav a:hover,nav a.active{color:var(--text)}
+nav a:hover::after,nav a.active::after{width:100%}
+.nav-actions{display:flex;gap:10px;align-items:center}
+.icon-btn{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);
+  background:var(--card);color:var(--text);cursor:pointer;font-size:1.05rem;
+  display:flex;align-items:center;justify-content:center;transition:.25s}
+.icon-btn:hover{transform:translateY(-2px);border-color:var(--acc);box-shadow:0 6px 18px rgba(56,189,248,.25)}
+
+/* ===== hero ===== */
+header{
+  min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;position:relative;z-index:1;padding:110px 20px 60px;
+}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:999px;
+  border:1px solid var(--line);background:color-mix(in srgb,var(--card) 70%,transparent);
+  font-size:.8rem;color:var(--muted);margin-bottom:26px;animation:fadeUp .8s .1s both}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:#34d399;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(52,211,153,.5)}50%{box-shadow:0 0 0 7px rgba(52,211,153,0)}}
+h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:900;letter-spacing:-1px;line-height:1.05;animation:fadeUp .8s .2s both}
+h1 .glow{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 24px rgba(56,189,248,.35))}
+.roles{margin-top:14px;font-size:clamp(1rem,2.6vw,1.35rem);color:var(--muted);min-height:1.6em;animation:fadeUp .8s .3s both}
+.roles .cursor{display:inline-block;width:2px;height:1.1em;background:var(--acc);vertical-align:-2px;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero-desc{max-width:640px;margin:22px auto 0;color:var(--muted);line-height:1.75;font-size:.98rem;animation:fadeUp .8s .4s both}
+.hero-cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;justify-content:center;animation:fadeUp .8s .5s both}
+.btn{padding:13px 26px;border-radius:12px;font-weight:700;font-size:.92rem;text-decoration:none;transition:.25s;border:1px solid transparent;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 10px 30px rgba(56,189,248,.35)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(56,189,248,.45)}
+.btn-ghost{border-color:var(--line);color:var(--text);background:color-mix(in srgb,var(--card) 60%,transparent)}
+.btn-ghost:hover{transform:translateY(-3px);border-color:var(--acc)}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:1.4rem;animation:bob 2s infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+/* ===== sections ===== */
+section{max-width:1080px;margin:0 auto;padding:90px 22px 30px;position:relative;z-index:1}
+.sec-tag{display:inline-block;font-size:.75rem;font-weight:800;letter-spacing:2.5px;color:var(--acc);
+  border:1px solid color-mix(in srgb,var(--acc) 35%,transparent);border-radius:999px;padding:6px 14px;margin-bottom:14px;
+  background:color-mix(in srgb,var(--acc) 8%,transparent)}
+h2{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800;margin-bottom:8px}
+.sec-sub{color:var(--muted);margin-bottom:40px;max-width:620px;line-height:1.7}
+
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ===== about stats ===== */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;margin-top:36px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;text-align:center;transition:.3s;cursor:default}
+.stat:hover{transform:translateY(-5px);border-color:var(--acc);box-shadow:0 14px 34px rgba(2,132,199,.18)}
+.stat .num{font-size:2.3rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .lbl{color:var(--muted);font-size:.86rem;margin-top:4px}
+
+/* ===== skills ===== */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.skill{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;transition:.3s}
+.skill:hover{border-color:var(--acc);transform:translateY(-4px);box-shadow:0 12px 30px rgba(2,132,199,.15)}
+.skill .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.skill .name{font-weight:700}
+.skill .pct{font-size:.82rem;color:var(--acc);font-weight:800}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar .fill{height:100%;width:0;border-radius:99px;background:var(--grad);transition:width 1.3s cubic-bezier(.2,.7,.3,1)}
+.skill .ico{font-size:1.3rem}
+
+/* ===== soft skills chips ===== */
+.chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.chip{padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:var(--card);
+  font-size:.9rem;font-weight:600;transition:.25s;cursor:default;display:inline-flex;gap:8px;align-items:center}
+.chip:hover{border-color:var(--acc2);transform:translateY(-3px) scale(1.04);box-shadow:0 8px 20px rgba(99,102,241,.22)}
+
+/* ===== timeline ===== */
+.timeline{position:relative;margin-left:8px}
+.timeline::before{content:'';position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:3px;
+  background:linear-gradient(var(--acc),var(--acc2))}
+.titem{position:relative;padding:0 0 38px 34px}
+.titem:last-child{padding-bottom:4px}
+.titem::before{content:'';position:absolute;left:-8px;top:6px;width:19px;height:19px;border-radius:50%;
+  background:var(--bg);border:4px solid var(--acc);transition:.3s}
+.titem:hover::before{background:var(--acc);box-shadow:0 0 0 6px color-mix(in srgb,var(--acc) 22%,transparent)}
+.titem .years{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:1px;color:var(--acc);
+  background:color-mix(in srgb,var(--acc) 10%,transparent);border:1px solid color-mix(in srgb,var(--acc) 30%,transparent);
+  padding:4px 12px;border-radius:999px;margin-bottom:10px}
+.titem h3{font-size:1.12rem;font-weight:800}
+.titem .org{color:var(--acc2);font-weight:600;font-size:.95rem;margin:2px 0 6px}
+.titem .loc{color:var(--muted);font-size:.86rem}
+.titem .card{margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;font-size:.92rem;color:var(--muted);line-height:1.65}
+.titem .card b{color:var(--text)}
+.titem:hover .card{border-color:var(--acc)}
+
+/* ===== education ===== */
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.edu{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;transition:.3s;position:relative;overflow:hidden}
+.edu::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:.4s}
+.edu:hover::after{transform:scaleX(1)}
+.edu:hover{transform:translateY(-5px);box-shadow:0 14px 34px rgba(2,132,199,.15)}
+.edu .yr{font-size:.78rem;font-weight:800;color:var(--acc);letter-spacing:1px}
+.edu h3{margin:8px 0 4px;font-size:1.02rem}
+.edu p{color:var(--muted);font-size:.88rem}
+
+/* ===== contact ===== */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:10px}
+.ccard{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);
+  border-radius:16px;padding:20px 22px;text-decoration:none;color:var(--text);transition:.3s}
+.ccard:hover{transform:translateY(-4px);border-color:var(--acc);box-shadow:0 12px 30px rgba(2,132,199,.18)}
+.ccard .ico{width:46px;height:46px;border-radius:12px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.ccard .k{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.ccard .v{font-weight:700;font-size:.93rem;word-break:break-all}
+.copy-hint{font-size:.72rem;color:var(--muted);margin-top:2px}
+
+/* ===== footer ===== */
+footer{position:relative;z-index:1;text-align:center;padding:50px 20px 40px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);margin-top:70px}
+footer .heart{color:#f472b6}
+
+/* ===== toast ===== */
+#toast{position:fixed;bottom:26px;left:50%;transform:translate(-50%,80px);background:var(--card);
+  border:1px solid var(--acc);color:var(--text);padding:12px 22px;border-radius:12px;font-size:.88rem;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);opacity:0;transition:.35s;z-index:99;pointer-events:none}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ===== back to top ===== */
+#toTop{position:fixed;bottom:26px;right:26px;width:46px;height:46px;border-radius:12px;border:1px solid var(--line);
+  background:var(--card);color:var(--text);font-size:1.15rem;cursor:pointer;opacity:0;pointer-events:none;transition:.3s;z-index:60}
+#toTop.show{opacity:1;pointer-events:auto}
+#toTop:hover{border-color:var(--acc);transform:translateY(-3px)}
+
+/* ===== print ===== */
+@media print{
+  #fx,.vignette,nav,.scroll-hint,#toTop,#toast,.hero-cta,.badge,.sec-tag{display:none!important}
+  body{background:#fff!important;color:#111!important}
+  header{min-height:auto;padding:30px 0 10px}
+  h1 .glow{color:#111!important;filter:none}
+  .roles{color:#444}
+  .roles::after{content:''}
+  section{padding:26px 0 10px;page-break-inside:avoid}
+  .stat,.skill,.chip,.titem .card,.edu,.ccard{background:#fafafa!important;border-color:#ddd!important;box-shadow:none!important}
+  .bar{background:#e5e5e5}
+  .bar .fill{background:#333!important}
+  footer{border-color:#ddd}
+}
+
+@media (max-width:720px){
+  nav ul{display:none}
+  section{padding:70px 18px 20px}
+}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+<div class="vignette"></div>
+
+<nav>
+  <div class="logo">SOLEHUDIN<span style="color:var(--acc)">.</span>CV</div>
+  <ul>
+    <li><a href="#tentang">Tentang</a></li>
+    <li><a href="#keahlian">Keahlian</a></li>
+    <li><a href="#pengalaman">Pengalaman</a></li>
+    <li><a href="#pendidikan">Pendidikan</a></li>
+    <li><a href="#kontak">Kontak</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="icon-btn" id="themeBtn" title="Ganti tema">🌙</button>
+    <button class="icon-btn" id="printBtn" title="Unduh / Cetak PDF">🖨️</button>
+  </div>
+</nav>
+
+<header>
+  <div class="badge"><span class="dot"></span> Terbuka untuk peluang baru</div>
+  <h1>Halo, saya <span class="glow">Solehudin</span> 👋</h1>
+  <div class="roles">Saya seorang <span id="typed"></span><span class="cursor"></span></div>
+  <p class="hero-desc">Admin Engineering berpengalaman 13+ tahun di properti komersial & residensial kelas atas Jakarta,
+  dengan fondasi Sistem Informasi dan keterampilan web programming, instalasi sistem operasi, serta pemeliharaan fasilitas.</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="#kontak">Hubungi Saya →</a>
+    <button class="btn btn-ghost" id="printBtn2">📄 Unduh CV (PDF)</button>
+  </div>
+  <div class="scroll-hint">⌄</div>
+</header>
+
+<section id="tentang">
+  <span class="sec-tag">DATA PERSONAL</span>
+  <h2>Tentang Saya</h2>
+  <p class="sec-sub">Data personal, latar belakang, dan sorotan perjalanan karier.</p>
+
+  <div class="stats">
+    <div class="stat reveal"><div class="num" data-count="13">0</div><div class="lbl">Tahun Pengalaman Kerja</div></div>
+    <div class="stat reveal"><div class="num" data-count="4">0</div><div class="lbl">Perusahaan / Institusi</div></div>
+    <div class="stat reveal"><div class="num" data-count="3">0</div><div class="lbl">Gedung Dikelola di Jakarta</div></div>
+    <div class="stat reveal"><div class="num" data-count="35">0</div><div class="lbl">Usia (Pemalang, 10 Sep 1991)</div></div>
+  </div>
+
+  <div class="contact-grid" style="margin-top:18px">
+    <div class="ccard reveal" style="cursor:default">
+      <div class="ico">🎂</div>
+      <div><div class="k">Tanggal Lahir</div><div class="v">10 September 1991</div></div>
+    </div>
+    <div class="ccard reveal" style="cursor:default">
+      <div class="ico">📍</div>
+      <div><div class="k">Alamat</div><div class="v">Banjardawa RT002/RW004, Kec. Taman, Kab. Pemalang, Jawa Tengah 52361</div></div>
+    </div>
+    <div class="ccard reveal" style="cursor:default">
+      <div class="ico">👤</div>
+      <div><div class="k">Data Diri</div><div class="v">Laki-laki · Menikah · WNI</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="keahlian">
+  <span class="sec-tag">KEMAMPUAN</span>
+  <h2>Keahlian Teknis</h2>
+  <p class="sec-sub">Arahkan kursor ke setiap kartu — skill bar akan terisi saat discroll ke layar.</p>
+  <div class="skills-grid">
+    <div class="skill reveal"><div class="top"><span class="name"><span class="ico">🖥️</span> Microsoft Office</span><span class="pct">90%</span></div><div class="bar"><div class="fill" data-w="90"></div></div></div>
+    <div class="skill reveal"><div class="top"><span class="name"><span class="ico">🎨</span> Photoshop</span><span class="pct">75%</span></div><div class="bar"><div class="fill" data-w="75"></div></div></div>
+    <div class="skill reveal"><div class="top"><span class="name"><span class="ico">🌐</span> Web Programming</span><span class="pct">70%</span></div><div class="bar"><div class="fill" data-w="70"></div></div></div>
+    <div class="skill reveal"><div class="top"><span class="name"><span class="ico">💿</span> Instalasi OS & Program (Windows & Linux)</span><span class="pct">85%</span></div><div class="bar"><div class="fill" data-w="85"></div></div></div>
+  </div>
+
+  <h2 style="margin-top:56px;font-size:1.5rem">Kepribadian</h2>
+  <p class="sec-sub" style="margin-bottom:24px">Hover chip untuk melihat detailnya.</p>
+  <div class="chips">
+    <span class="chip reveal" data-tip="Menghasilkan ide & solusi baru">💡 Kreatif & Inovatif</span>
+    <span class="chip reveal" data-tip="Integritas dalam setiap tugas">🤝 Jujur</span>
+    <span class="chip reveal" data-tip="Tepat waktu & teratur">⏰ Disiplin</span>
+    <span class="chip reveal" data-tip="Amanah pada tanggung jawab">🎯 Bertanggung Jawab</span>
+    <span class="chip reveal" data-tip="Fleksibel individual maupun kelompok">👥 Dapat Bekerja dengan Tim & Individu</span>
+  </div>
+</section>
+
+<section id="pengalaman">
+  <span class="sec-tag">PENGALAMAN</span>
+  <h2>Riwayat Pekerjaan</h2>
+  <p class="sec-sub">13+ tahun berkarya — dari tata usaha pendidikan hingga pengelolaan engineering gedung komersial & residensial premium di Jakarta.</p>
+
+  <div class="timeline">
+    <div class="titem reveal">
+      <span class="years">2019 — SEKARANG</span>
+      <h3>Admin Engineering</h3>
+      <div class="org">Taman Anggrek Residence (Agung Sedayu Realestate Indonesia)</div>
+      <div class="loc">📍 Jakarta</div>
+      <div class="card"><b>Admin Engineering</b> — pengelolaan administrasi engineering untuk apartemen residensial premium: dokumentasi pemeliharaan, koordinasi tim teknis, dan dukungan operasional fasilitas.</div>
+    </div>
+    <div class="titem reveal">
+      <span class="years">2016 — 2019</span>
+      <h3>Admin Engineering</h3>
+      <div class="org">The Kuningan Place</div>
+      <div class="loc">📍 Jakarta</div>
+      <div class="card"><b>Admin Engineering</b> — administrasi teknis gedung apartemen komersial: penjadwalan preventive maintenance, pengelolaan dokumen & laporan teknis.</div>
+    </div>
+    <div class="titem reveal">
+      <span class="years">2012 — 2016</span>
+      <h3>Admin Engineering</h3>
+      <div class="org">OCBC NISP Tower (PT. Sanggraha Property Management)</div>
+      <div class="loc">📍 Jakarta</div>
+      <div class="card"><b>Admin Engineering</b> — dukungan administrasi engineering gedung perkantoran: arsip teknis, koordinasi vendor, dan pelaporan rutin.</div>
+    </div>
+    <div class="titem reveal">
+      <span class="years">2009 — 2012</span>
+      <h3>Staff Tata Usaha</h3>
+      <div class="org">SMP Islam Al Musthofa</div>
+      <div class="loc">📍 Taman, Pemalang</div>
+      <div class="card"><b>Staff Tata Usaha</b> — administrasi sekolah: pengelolaan dokumen, data siswa, dan kebutuhan perkantoran.</div>
+    </div>
+  </div>
+</section>
+
+<section id="pendidikan">
+  <span class="sec-tag">PENDIDIKAN</span>
+  <h2>Riwayat Pendidikan</h2>
+  <p class="sec-sub">Perjalanan akademik dari sekolah dasar hingga jenjang S1 Sistem Informasi.</p>
+  <div class="edu-grid">
+    <div class="edu reveal"><div class="yr">2022</div><h3>STMIK Muhammadiyah Jakarta</h3><p>Sistem Informasi (S1)</p></div>
+    <div class="edu reveal"><div class="yr">2009</div><h3>SMA Negeri 2 Pemalang</h3><p>Ilmu Sosial</p></div>
+    <div class="edu reveal"><div class="yr">2006</div><h3>SMP Islam Al Musthofa</h3><p>Taman, Pemalang</p></div>
+    <div class="edu reveal"><div class="yr">2003</div><h3>SD Negeri 01 Beji</h3><p>Pemalang</p></div>
+  </div>
+</section>
+
+<section id="kontak">
+  <span class="sec-tag">KONTAK</span>
+  <h2>Mari Terhubung</h2>
+  <p class="sec-sub">Klik kartu di bawah untuk menyalin kontak atau membuka tautan.</p>
+  <div class="contact-grid">
+    <div class="ccard reveal" data-copy="087-888-027-555" role="button" tabindex="0">
+      <div class="ico">📞</div>
+      <div><div class="k">Telepon / WhatsApp</div><div class="v">087-888-027-555</div><div class="copy-hint">Klik untuk menyalin</div></div>
+    </div>
+    <div class="ccard reveal" data-copy="solehudin91@hotmail.com" role="button" tabindex="0">
+      <div class="ico">✉️</div>
+      <div><div class="k">Email</div><div class="v">solehudin91@hotmail.com</div><div class="copy-hint">Klik untuk menyalin</div></div>
+    </div>
+    <a class="ccard reveal" href="https://id.linkedin.com/in/solehudin91" target="_blank" rel="noopener">
+      <div class="ico">💼</div>
+      <div><div class="k">LinkedIn</div><div class="v">id.linkedin.com/in/solehudin91</div><div class="copy-hint">Klik untuk membuka</div></div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  Dibuat dengan <span class="heart">♥</span> — Solehudin © 2026 · Admin Engineering & IT Support
+</footer>
+
+<div id="toast">Tersalin!</div>
+<button id="toTop" title="Kembali ke atas">↑</button>
+
+<script>
+/* ---------- theme ---------- */
+const themeBtn=document.getElementById('themeBtn');
+const saved=localStorage.getItem('cv-theme');
+if(saved==='light'){document.documentElement.setAttribute('data-theme','light');themeBtn.textContent='☀️';}
+themeBtn.onclick=()=>{
+  const el=document.documentElement;
+  const light=el.getAttribute('data-theme')==='light';
+  if(light){el.removeAttribute('data-theme');themeBtn.textContent='🌙';localStorage.setItem('cv-theme','dark');}
+  else{el.setAttribute('data-theme','light');themeBtn.textContent='☀️';localStorage.setItem('cv-theme','light');}
+};
+
+/* ---------- print ---------- */
+function doPrint(){window.print();}
+document.getElementById('printBtn').onclick=doPrint;
+document.getElementById('printBtn2').onclick=doPrint;
+
+/* ---------- typewriter ---------- */
+const roles=['Admin Engineering','IT Support','Web Programming Enthusiast','Problem Solver'];
+const typedEl=document.getElementById('typed');
+let ri=0,ci=0,del=false;
+function type(){
+  const w=roles[ri];
+  typedEl.textContent=w.slice(0,ci);
+  if(!del){ci++;if(ci>w.length){del=true;return setTimeout(type,1800);}}
+  else{ci--;if(ci===0){del=false;ri=(ri+1)%roles.length;}}
+  setTimeout(type,del?38:85);
+}
+type();
+
+/* ---------- reveal on scroll ---------- */
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ---------- skill bars ---------- */
+const barIO=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.style.width=e.target.dataset.w+'%';barIO.unobserve(e.target);}});
+},{threshold:.4});
+document.querySelectorAll('.bar .fill').forEach(f=>barIO.observe(f));
+
+/* ---------- counters ---------- */
+const cntIO=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target,target=+el.dataset.count,dur=1400,t0=performance.now();
+    (function tick(t){
+      const p=Math.min((t-t0)/dur,1);
+      el.textContent=Math.round(target*(1-Math.pow(1-p,3)));
+      if(p<1)requestAnimationFrame(tick);
+    })(t0);
+    cntIO.unobserve(el);
+  });
+},{threshold:.6});
+document.querySelectorAll('.stat .num').forEach(el=>cntIO.observe(el));
+
+/* ---------- active nav ---------- */
+const secs=[...document.querySelectorAll('section[id]')];
+const links=[...document.querySelectorAll('nav ul a')];
+addEventListener('scroll',()=>{
+  const y=scrollY+140;
+  let cur=secs[0]?.id;
+  secs.forEach(s=>{if(s.offsetTop<=y)cur=s.id;});
+  links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+  document.getElementById('toTop').classList.toggle('show',scrollY>500);
+},{passive:true});
+document.getElementById('toTop').onclick=()=>scrollTo({top:0,behavior:'smooth'});
+
+/* ---------- copy to clipboard ---------- */
+const toast=document.getElementById('toast');
+let toastTimer;
+function showToast(msg){
+  toast.textContent=msg;toast.classList.add('show');
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2200);
+}
+document.querySelectorAll('[data-copy]').forEach(el=>{
+  el.onclick=async()=>{
+    const v=el.dataset.copy;
+    try{await navigator.clipboard.writeText(v);showToast('✅ Tersalin: '+v);}
+    catch{showToast('📋 '+v);}
+  };
+});
+
+/* ---------- chips tooltip ---------- */
+document.querySelectorAll('.chip[data-tip]').forEach(ch=>{
+  ch.title=ch.dataset.tip;
+});
+
+/* ---------- particle network ---------- */
+const cv=document.getElementById('fx'),ctx=cv.getContext('2d');
+let W,H,pts;
+function resize(){
+  W=cv.width=innerWidth;H=cv.height=innerHeight;
+  const n=Math.min(70,Math.floor(W*H/22000));
+  pts=Array.from({length:n},()=>({
+    x:Math.random()*W,y:Math.random()*H,
+    vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,
+    r:Math.random()*1.8+.6
+  }));
+}
+resize();addEventListener('resize',resize);
+const isLight=()=>document.documentElement.getAttribute('data-theme')==='light';
+(function anim(){
+  ctx.clearRect(0,0,W,H);
+  const col=isLight()?'2,132,199':'148,163,184';
+  for(const p of pts){
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0||p.x>W)p.vx*=-1;
+    if(p.y<0||p.y>H)p.vy*=-1;
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);
+    ctx.fillStyle=`rgba(${col},.5)`;ctx.fill();
+  }
+  for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+    const a=pts[i],b=pts[j],dx=a.x-b.x,dy=a.y-b.y,d=dx*dx+dy*dy;
+    if(d<130*130){
+      ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+      ctx.strokeStyle=`rgba(${col},${.14*(1-d/16900)})`;ctx.stroke();
+    }
+  }
+  requestAnimationFrame(anim);
+})();
+</script>
+</body>
+</html>
